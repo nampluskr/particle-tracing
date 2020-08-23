@@ -13,5 +13,3 @@
 - Dielectrophoresis torque
 
 - Drag torque
-
-$$a, b, c$$
