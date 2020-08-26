@@ -7,8 +7,8 @@ from pct3d import time_, pos_, vel_, omg_, quat_
 from pct3d import force_drag3d, force_grav3d, torque_drag3d
 
 
-def flow_velocity(x, y, z, U0=0.6, D=4.2e-3):
-    return np.r_[2*U0*(1 - (np.sqrt(y**2)/D/2)**2), 0, 0]
+def flow_velocity(x, y, z, U0=0.6, R=4.2e-3):
+    return np.r_[2*U0*(1 - (y**2/R)**2), 0, 0]
 
 params = pct.params
 params.vf = flow_velocity
