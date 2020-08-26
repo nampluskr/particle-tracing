@@ -7,10 +7,10 @@ import pct
 ## Variables [3D]: u = [t, [x,y,z], [vx,vy,vz], [w1,w2,w3], [e1,e2,e3,e0]]
 
 def time_(u): return u[0]    if u.ndim < 2 else u[:,0]
-def pos_(u):  return u[1:4]  if u.ndim < 2 else u[:,1:4].T
-def vel_(u):  return u[4:7]  if u.ndim < 2 else u[:,4:7].T
-def omg_(u):  return u[7:10] if u.ndim < 2 else u[:,7:10].T
-def quat_(u): return u[10:]  if u.ndim < 2 else u[:,10:].T
+def pos_(u):  return u[1:4]  if u.ndim < 2 else u[:,1:4]
+def vel_(u):  return u[4:7]  if u.ndim < 2 else u[:,4:7]
+def omg_(u):  return u[7:10] if u.ndim < 2 else u[:,7:10]
+def quat_(u): return u[10:]  if u.ndim < 2 else u[:,10:]
 
 
 ## 운동방정식/토크방정식 [3D]
@@ -150,9 +150,9 @@ def torque_dep3d(u, params):
 
 def plot_traj3d(ax, sol, length, nskip=100):
     sol = sol[::nskip]
-    x, y, z = pos_(sol)
+    x, y, z = pos_(sol).T
     b = length/2.
-    pt0 = pos_(sol).T
+    pt0 = pos_(sol)
     pt1 = np.array([pos_(s) + pct.rot3d(*quat_(s)).dot([ b, 0, 0]) for s in sol])
     pt2 = np.array([pos_(s) + pct.rot3d(*quat_(s)).dot([-b, 0, 0]) for s in sol])
 
