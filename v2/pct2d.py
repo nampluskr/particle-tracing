@@ -31,12 +31,15 @@ def _total(funcs, u, params):
 
 def eqns(u, t, forces, torques, params):
     total_force  = _total(forces, u, params) if len(forces) else np.zeros(2)
-    d_vel = total_force/params.mass
-
     total_torque = _total(torques, u, params) if len(torques) else 0.0
+
+    d_time = 1
+    d_pos = vel_(u)
+    d_vel = total_force/params.mass
+    d_ang = omg_(u)
     d_omg = total_torque/params.inertia_short
 
-    return np.r_[1.0, vel_(u), d_vel, omg_(u), d_omg]
+    return np.r_[d_time, d_pos, d_vel, d_ang, d_omg]
 
 def trace(u0, forces, torques, params, conditions):
     return solve(eqns, u0, forces, torques, params, conditions)
