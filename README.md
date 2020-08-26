@@ -1,4 +1,4 @@
-# particle-tracing
+# Particle tracing
 
 # Forces
 
